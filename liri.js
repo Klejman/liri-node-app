@@ -95,7 +95,7 @@ function myTweets() {
 function spotifyThis() {
 
   let spotify = new Spotify({
-    id: keys.spotifyKeys.client_ID,
+    id: keys.spotifyKeys.client_id,
     secret: keys.spotifyKeys.client_secret
   });
 
