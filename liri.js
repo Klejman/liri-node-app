@@ -3,20 +3,20 @@ const fs = require("fs");
 const keys = require("./keys.js");
 
 //twitter,spotify, request required HERE
-let Twitter = require("twitter");
-let Spotify = require("node-spotify-api");
-let Request = require("request");
+const Twitter = require("twitter");
+const Spotify = require("node-spotify-api");
+const Request = require("request");
 
 // user generated response based on input
-let userRequest = process.argv[2];
+const terminalRequest = process.argv[2];
 let userInput = "";
 for (let i = 3; i < process.argv.length; i++) {
-  userInput = userInput + " " + process.argv[i];
+  userInput += " " + process.argv[i];
 }
 
 let userInputMovie = "";
 for (let i = 3; i < process.argv.length; i++) {
-  userInputMovie = userInputMovie + process.argv[i] + "+";
+  userInputMovie += process.argv[i] + "+";
 }
 
 //execute defaults if nothing entered by user
@@ -40,17 +40,17 @@ else {
 let omdbURL = "http://www.omdbapi.com/?apikey=" + keys.omdbKeys.omdb_key + "&t=" + movie;
 
 
-switch (userRequest) {
+switch (terminalRequest) {
 
   case "my-tweets":
     myTweets();
     break;
 
   case "spotify-this-song":
-    spotifyThis();
+    spotifyOn();
     break;
 
-  case "movie-this":
+  case "movieInfoOnDemand":
     movieThis();
     break;
 
@@ -70,16 +70,17 @@ function myTweets() {
     access_token_secret: keys.twitterKeys.access_token_secret
   });
 
-  let params = {screen_name: "katieMary"};
+  let params = {screen_name: "katiedidit_1984"};
 
   twitter.get("statuses/user_timeline", params, function (err, tweets, response) {
     if (err) {
+      tweet.length = 20;
       console.log(err);
     }
     if (!err) {
-      for (let i = 0; i < tweets.length && i <= 20; i++){
+      for (let i = 0; i < tweets.length; i++){
 
-        console.log(" I don't tweet but when I do I tweet 20 messages in bulk...and apparently need to know when I tweeted them. Without further ado your Tweet alibi  ");
+        console.log("I don't tweet but when I do I tweet about...");
         console.log(" ");
         console.log("---------------------------------------------------");
         console.log(tweets[i].text);
@@ -92,7 +93,7 @@ function myTweets() {
 }
 
 //spotify-this-song function
-function spotifyThis() {
+function spotifyOn() {
 
   let spotify = new Spotify({
     id: keys.spotifyKeys.client_id,
@@ -112,7 +113,7 @@ function spotifyThis() {
   });
 }
 
-//movie-this function
+//movieInfoOnDemand function
 function movieThis() {
 
   Request(omdbURL, function (err, res, body) {
@@ -180,9 +181,9 @@ function exeDefault() {
 
     if (randomCommand === "spotify-this-song"){
       song = randomQuery;
-      spotifyThis();
+      spotifyOn();
     }
-    else if (randomCommand === "movie-this"){
+    else if (randomCommand === "movieInfoOnDemand"){
       movie = randomQuery;
       omdbURL = "http://www.omdbapi.com/?apikey=" + keys.omdbKeys.omdb_key + "&t=" + movie;
       movieThis();
