@@ -35,7 +35,7 @@ Following node liri.js add one of the following commands...
     * `do-what-it-says`
     // Using the `fs` Node package, my LIRI app will take the text inside of random.txt and then use it to call one of LIRI's commands. Spoiler alert it will run `spotify-this-song` for "I Want it That Way,"
 
-  Thanks for taking the time to read the documentation and enjoy this notQuiteSiri app. 
+  Thanks for taking the time to read the documentation and enjoy this notQuiteSiri app.
 
 
 
